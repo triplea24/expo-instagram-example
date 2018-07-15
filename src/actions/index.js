@@ -1,9 +1,9 @@
 import axios from 'axios';
-// import 
 
-const FETCH_POSTS = 'FETCH_POSTS';
+export const FETCH_POSTS = 'FETCH_POSTS';
 
 export function fetchPosts(){
+    const url = 'http://192.168.7.50:3000/posts';
     return (dispatch) => {
         axios.get(url)
             .then(res => {

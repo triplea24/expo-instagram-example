@@ -13,18 +13,18 @@ if (__DEV__) {
   KeepAwake.activate();
 }
 
-export default class App extends React.Component {
-  render() {
-    const store = createStore(reducers,{},applyMiddleware(ReduxThunk));
-    return (
-      <Provider store={store}>
-        <View>
-          <Header title="Packt Instagram"/>
-          <FeedScreen />
-        </View>
-      </Provider>
-    );
-  }
+
+export default App = () => {
+  
+  const store = createStore(reducers,{},applyMiddleware(ReduxThunk));
+  return (
+    <Provider store={store}>
+      <View>
+        <Header title="Packt Instagram"/>
+        <FeedScreen />
+      </View>
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
