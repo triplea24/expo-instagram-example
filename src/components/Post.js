@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,StyleSheet,Button,Text} from 'react-native';
+import {View,StyleSheet,TouchableWithoutFeedback,Text} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import UserAvatar from './UserAvatar';
@@ -7,10 +7,22 @@ import PostPhoto from './PostPhoto';
 
 export default class Post extends Component{
     // TODO: OnLikePress should be implemented
+    constructor(props){
+        super(props);
+        this.state = { 
+            liked: false,
+            likeIcon: 'ios-heart-outline',
+        };
+    }
+
+    toggleLike(){
+        const liked = !this.state.liked;
+        const likeIcon = liked ? 'ios-heart' : 'ios-heart-outline';
+        this.setState({ liked,likeIcon });
+    }
+
     render(){
         const { username, user_avatar, uri, caption } = this.props.data;
-        // const avatarUri = "https://cdn.iconscout.com/public/images/icon/free/png-256/avatar-user-teacher-312a499a08079a12-256x256.png";
-        // const postUri = "https://cdn.iconscout.com/public/images/icon/free/png-256/avatar-user-teacher-312a499a08079a12-256x256.png";
         return (
             <View style={styles.container}>
                 <View style={styles.thumbnailContainer}>
@@ -21,10 +33,13 @@ export default class Post extends Component{
                 </View>
                 <PostPhoto uri={uri} />
                 <View style={styles.likeContainer}>
-                    <Ionicons 
-                        name='ios-heart-outline'
-                        size={30}
-                    />
+                    <TouchableWithoutFeedback onPress={this.toggleLike.bind(this)}>
+                        <Ionicons
+                            name={this.state.likeIcon}
+                            size={30}
+                            style={{color: this.state.liked ? 'red' : 'black'}}
+                        />
+                    </TouchableWithoutFeedback>
                 </View>
                 <View style={styles.imageMeta}>
                     <Text style={styles.username}>{username}</Text>
