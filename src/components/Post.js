@@ -8,17 +8,18 @@ import PostPhoto from './PostPhoto';
 export default class Post extends Component{
     // TODO: OnLikePress should be implemented
     render(){
-        const avatarUri = "https://cdn.iconscout.com/public/images/icon/free/png-256/avatar-user-teacher-312a499a08079a12-256x256.png";
-        const postUri = "https://cdn.iconscout.com/public/images/icon/free/png-256/avatar-user-teacher-312a499a08079a12-256x256.png";
+        const { username, user_avatar, uri, caption } = this.props.data;
+        // const avatarUri = "https://cdn.iconscout.com/public/images/icon/free/png-256/avatar-user-teacher-312a499a08079a12-256x256.png";
+        // const postUri = "https://cdn.iconscout.com/public/images/icon/free/png-256/avatar-user-teacher-312a499a08079a12-256x256.png";
         return (
             <View style={styles.container}>
                 <View style={styles.thumbnailContainer}>
-                    <UserAvatar uri={avatarUri} />
+                    <UserAvatar uri={user_avatar} />
                     <View style={styles.userContainer}>
-                        <Text style={styles.username}>Username</Text>
+                        <Text style={styles.username}>{username}</Text>
                     </View>
                 </View>
-                <PostPhoto uri={postUri} />
+                <PostPhoto uri={uri} />
                 <View style={styles.likeContainer}>
                     <Ionicons 
                         name='ios-heart-outline'
@@ -26,8 +27,8 @@ export default class Post extends Component{
                     />
                 </View>
                 <View style={styles.imageMeta}>
-                    <Text style={styles.username}>Username</Text>
-                    <Text>caption</Text>
+                    <Text style={styles.username}>{username}</Text>
+                    <Text>{caption}</Text>
                 </View>
             </View>
         );

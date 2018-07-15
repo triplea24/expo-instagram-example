@@ -1,14 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { KeepAwake, registerRootComponent } from 'expo';
+import { StyleSheet, View } from 'react-native';
 
-import {Header,Post} from './src/components';
+if (__DEV__) {
+  KeepAwake.activate();
+}
+
+
+import { Header } from './src/components';
+import { FeedScreen } from './src/screens';
 
 export default class App extends React.Component {
   render() {
     return (
       <View>
-        <Header title="Packt"/>
-        <Post />
+        <Header title="Packt Instagram"/>
+      <FeedScreen />
       </View>
     );
   }
@@ -22,3 +29,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+registerRootComponent(App);
