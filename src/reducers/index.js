@@ -1,6 +1,6 @@
-import { combineReducers, createStore } from 'redux';
+import { combineReducers } from 'redux';
+import PostsReducer from './posts-reducer';
 
 export default reducers = combineReducers({
-    photo: () => [],
+    posts: PostsReducer,
 });
-
