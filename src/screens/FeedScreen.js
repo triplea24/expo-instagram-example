@@ -1,28 +1,18 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
 import { Post } from '../components';
+import { fetchPosts } from '../actions';
 
-const url = 'http://192.168.7.50:3000/posts';
-
-export default class FeedScreen extends Component{
-    state = {
-        posts: [],
-    }
-    
+class FeedScreen extends Component{
     componentDidMount(){
-        axios.get(url)
-            .then(res => {
-                this.setState({posts: res.data});
-            }).catch( err=> {
-                console.log(err);
-            })
+        this.props.fetchPosts();
     }
 
     renderPosts(){
         let key = 0;
-        return this.state.posts.map(_post => {
+        return this.props.posts.map(_post => {
             return (
                 <Post
                     key={key++} 
@@ -39,3 +29,11 @@ export default class FeedScreen extends Component{
         );
     }
 }
+
+function mapStateToProps(state){
+    return {
+        posts: state.posts,
+    };
+}
+
+export default connect(mapStateToProps, { fetchPosts })(FeedScreen);
